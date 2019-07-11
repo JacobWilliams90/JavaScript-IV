@@ -106,9 +106,20 @@ const J = new Student({
     favLanguage: 'JavaScript',
     specialty: 'Front-end',
     catchPhrase: `Don't forget the homies`,
-    favSubjects: ["Math","Sci","SS"]
+    favSubjects: ["Math","Sci","SS"],
+    gradClassName: 'CS1',
+    favInstructor: 'Tommyboy',
   });
 
+  const T = new Instructor({
+    name: 'Tommyboy',
+    location: 'Whats it to ya?',
+    age: 'None yo business',
+    favLanguage: 'JavaScript',
+    specialty: 'Front-end',
+    catchPhrase: `Don't forget the homies`,
+    favSubjects: ["nothing"],
+  });
   
   console.log(D.incDec(J))
   console.log(J.grade)
@@ -124,3 +135,5 @@ const J = new Student({
   console.log(J.grade)
 
   console.log(J.graduate())
+
+  console.log(D.gradClassName)
