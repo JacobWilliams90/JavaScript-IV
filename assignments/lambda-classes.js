@@ -58,6 +58,13 @@ class Student extends Person {
     sprintChallenge(subject){
         console.log(`${this.name} has begun sprint challenge on ${subject}.`)
     }
+
+    graduate(){
+        if (this.grade > 70)
+        return `${this.name} is ready to graduate!`
+        else
+        return `${this.name} needs to increse their grade to graduate.`
+    }
 }
 
 class PM extends Instructor {
@@ -113,3 +120,5 @@ const J = new Student({
   console.log(J.grade)
   console.log(D.incDec(J))
   console.log(J.grade)
+
+  console.log(J.graduate())
