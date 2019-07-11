@@ -26,15 +26,27 @@ Prototype Refactor
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
-function GameObject(attributes){
-    this.createdAt = attributes.createdAt;
-    this.name = attributes.name;
-    this.dimensions = attributes.dimensions;
-  }
+// function GameObject(attributes){
+//     this.createdAt = attributes.createdAt;
+//     this.name = attributes.name;
+//     this.dimensions = attributes.dimensions;
+//   }
   
-GameObject.prototype.destroy = function () {
-return `${this.name} was removed from the game.`;
-};
+// GameObject.prototype.destroy = function () {
+// return `${this.name} was removed from the game.`;
+// };
+
+class GameObject{
+    constructor(attributes){
+        this.createdAt = attributes.createdAt;
+        this.name = attributes.name;
+        this.dimensions = attributes.dimensions;
+    };
+
+    destroy() {
+        return `${this.name} was removed from the game.`;
+    };
+}
 
 /*
 === CharacterStats ===
@@ -43,17 +55,26 @@ return `${this.name} was removed from the game.`;
 * should inherit destroy() from GameObject's prototype
 */
 
-function CharacterStats(attributes) {
-GameObject.call(this, attributes);
-this.healthPoints = attributes.healthPoints;
+// function CharacterStats(attributes) {
+// GameObject.call(this, attributes);
+// this.healthPoints = attributes.healthPoints;
+// }
+
+// CharacterStats.prototype = Object.create(GameObject.prototype);
+
+// CharacterStats.prototype.takeDamage = function () {
+// return `${this.name} took damage`;
+// }
+
+class CharacterStats extends GameObject {
+    constructor(attributes){
+    super(attributes);
+    }
+
+    takeDamage() {
+        return `${this.name} took damage`;
+    };
 }
-
-CharacterStats.prototype = Object.create(GameObject.prototype);
-
-CharacterStats.prototype.takeDamage = function () {
-return `${this.name} took damage`;
-}
-
 
 /*
 === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -65,18 +86,28 @@ return `${this.name} took damage`;
 * should inherit takeDamage() from CharacterStats
 */
 
-function Humanoid(attributes) {
-CharacterStats.call(this, attributes);
-    this.team = attributes.team;
-    this.weapons = attributes.weapons.toString();
-    this.language = attributes.language;
+// function Humanoid(attributes) {
+// CharacterStats.call(this, attributes);
+//     this.team = attributes.team;
+//     this.weapons = attributes.weapons.toString();
+//     this.language = attributes.language;
+// }
+
+// Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+// Humanoid.prototype.greet = function () {
+// return `${this.name} offers a greeting in ${this.language}.`;
+// };
+
+class Humanoid extends CharacterStats{
+    constructor(attributes) {
+        super(attributes);
+    };
+
+    greet(){
+        return `${this.name} offers a greeting in ${this.language}.`;
+    };
 }
-
-Humanoid.prototype = Object.create(CharacterStats.prototype);
-
-Humanoid.prototype.greet = function () {
-return `${this.name} offers a greeting in ${this.language}.`;
-};
 
 /*
 * Inheritance chain: GameObject -> CharacterStats -> Humanoid
@@ -153,35 +184,63 @@ const archer = new Humanoid({
 // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
 // * Create two new objects, one a villain and one a hero and fight it out with methods!
 
-function HeroVillan(attributes) {
-    Humanoid.call(this, attributes);
-    this.ability = attributes.ability;
-    this.finish = attributes.finish;
+// function HeroVillan(attributes) {
+//     Humanoid.call(this, attributes);
+//     this.ability = attributes.ability;
+//     this.finish = attributes.finish;
+// }
+
+// HeroVillan.prototype = Object.create(Humanoid.prototype);
+
+// HeroVillan.prototype.fight1 = function (target) {
+//     if (target.healthPoints <= 0){
+//     console.log(target.name + ' is looking hurt. Finish Him!')
+//     return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`
+//     }
+//     else {
+//     target["healthPoints"] = (target["healthPoints"] - 10)
+//     return `${this.name} lashes out with the ${this.ability} ability.`;
+//     }
+// };
+
+// HeroVillan.prototype.fight2 = function (target) {
+//     if (target.healthPoints <= 0){
+//     console.log(target.name + ' is looking hurt. Finish Him!')
+//     return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`;
+//     }
+//     else {
+//     target["healthPoints"] = (target["healthPoints"] - 15)
+//     return `${this.name} swings his ${this.weapons} at ` + target.name;
+// }
+// };
+
+class HeroVillan extends Humanoid{
+    constructor(attributes){
+        super(attributes);
+    }
+
+    fight1(target) {
+        if (target.healthPoints <= 0){
+        console.log(target.name + ' is looking hurt. Finish Him!')
+        return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`
+        }
+        else {
+        target["healthPoints"] = (target["healthPoints"] - 10)
+        return `${this.name} lashes out with the ${this.ability} ability.`;
+        }
+    };
+
+    fight2(target) {
+        if (target.healthPoints <= 0){
+        console.log(target.name + ' is looking hurt. Finish Him!')
+        return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`;
+        }
+        else {
+        target["healthPoints"] = (target["healthPoints"] - 15)
+        return `${this.name} swings his ${this.weapons} at ` + target.name;
+        }
+    }
 }
-
-HeroVillan.prototype = Object.create(Humanoid.prototype);
-
-HeroVillan.prototype.fight1 = function (target) {
-    if (target.healthPoints <= 0){
-    console.log(target.name + ' is looking hurt. Finish Him!')
-    return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`
-    }
-    else {
-    target["healthPoints"] = (target["healthPoints"] - 10)
-    return `${this.name} lashes out with the ${this.ability} ability.`;
-    }
-};
-
-HeroVillan.prototype.fight2 = function (target) {
-    if (target.healthPoints <= 0){
-    console.log(target.name + ' is looking hurt. Finish Him!')
-    return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`;
-    }
-    else {
-    target["healthPoints"] = (target["healthPoints"] - 15)
-    return `${this.name} swings his ${this.weapons} at ` + target.name;
-}
-};
 
 const hero = new HeroVillan({
     createdAt: new Date(),
