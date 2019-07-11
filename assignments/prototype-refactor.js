@@ -186,8 +186,8 @@ const archer = new Humanoid({
 
 // function HeroVillan(attributes) {
 //     Humanoid.call(this, attributes);
-//     this.ability = attributes.ability;
-//     this.finish = attributes.finish;
+    // this.ability = attributes.ability;
+    // this.finish = attributes.finish;
 // }
 
 // HeroVillan.prototype = Object.create(Humanoid.prototype);
@@ -217,6 +217,8 @@ const archer = new Humanoid({
 class HeroVillan extends Humanoid{
     constructor(attributes){
         super(attributes);
+        this.ability = attributes.ability;
+        this.finish = attributes.finish;
     }
 
     fight1(target) {
@@ -239,7 +241,7 @@ class HeroVillan extends Humanoid{
         target["healthPoints"] = (target["healthPoints"] - 15)
         return `${this.name} swings his ${this.weapons} at ` + target.name;
         }
-    }
+    };
 }
 
 const hero = new HeroVillan({
@@ -297,28 +299,28 @@ const villan = new HeroVillan({
 // console.log(hero.fight2(villan))
 
 //HERO WIN EXAMPLE
-// console.log('Round 1 Fight!')
-// console.log(villan.fight1(hero));
-// console.log(hero.fight1(villan));
-// console.log(hero.fight2(villan));
-// console.log(villan.fight2(hero));
-// console.log(hero.fight1(villan));
-// console.log(villan.fight2(hero));
-// console.log(hero.fight2(villan));
-// console.log(hero.fight2(villan));
-// console.log('Round 1 Finished');
+console.log('Round 1 Fight!')
+console.log(villan.fight1(hero));
+console.log(hero.fight1(villan));
+console.log(hero.fight2(villan));
+console.log(villan.fight2(hero));
+console.log(hero.fight1(villan));
+console.log(villan.fight2(hero));
+console.log(hero.fight2(villan));
+console.log(hero.fight2(villan));
+console.log('Round 1 Finished');
 
 //VILLAN WIN EXAMPLE
-console.log('Round 2 Fight!')
-console.log(hero.fight1(villan));
-console.log(villan.fight1(hero));
-console.log(villan.fight2(hero));
-console.log(hero.fight2(villan));
-console.log(villan.fight1(hero));
-console.log(hero.fight2(villan));
-console.log(villan.fight2(hero));
-console.log(villan.fight2(hero));
-console.log('Round 2 Finished');
+// console.log('Round 2 Fight!')
+// console.log(hero.fight1(villan));
+// console.log(villan.fight1(hero));
+// console.log(villan.fight2(hero));
+// console.log(hero.fight2(villan));
+// console.log(villan.fight1(hero));
+// console.log(hero.fight2(villan));
+// console.log(villan.fight2(hero));
+// console.log(villan.fight2(hero));
+// console.log('Round 2 Finished');
 
 
   
