@@ -28,6 +28,10 @@ class Instructor extends Person {
     grade(student, subject) {
         console.log(`${student.name} receives a perfect score on ${subject}`)
     }
+
+    incDec(student){
+        student.grade = (student.grade -+ Math.floor(Math.random() * 20))
+    }
 };
 
 class Student extends Person {
@@ -36,6 +40,7 @@ class Student extends Person {
         this.previousBackground = attb.previousBackground;
         this.className = attb.className;
         this.favSubjects = attb.favSubjects;
+        this.grade = attb.grade;
         }
     }
 
@@ -70,6 +75,7 @@ class PM extends Instructor {
     debugsCode(student, subject){
         console.log(`${this.name} debugs ${student.name}'s code on ${subject}`)
     }
+
 }
 
 
@@ -80,7 +86,8 @@ const J = new Student({
     favLanguage: 'dunno',
     specialty: '*looks shifty eyed*',
     catchPhrase: `Live every day as if it were your last.`,
-    favSubjects: ["Math"]
+    favSubjects: ["Math"],
+    grade: 100,
   });
 
   const D = new PM({
@@ -94,3 +101,15 @@ const J = new Student({
   });
 
   
+  console.log(D.incDec(J))
+  console.log(J.grade)
+  console.log(D.incDec(J))
+  console.log(J.grade)
+  console.log(D.incDec(J))
+  console.log(J.grade)
+  console.log(D.incDec(J))
+  console.log(J.grade)
+  console.log(D.incDec(J))
+  console.log(J.grade)
+  console.log(D.incDec(J))
+  console.log(J.grade)
