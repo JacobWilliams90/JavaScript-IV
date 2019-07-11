@@ -30,7 +30,9 @@ class Instructor extends Person {
     }
 
     incDec(student){
-        student.grade = (student.grade -+ Math.floor(Math.random() * 20))
+        let min = -5
+        let max = 5
+        student.grade = (student.grade + Math.floor(Math.random() * (max - min) + min))
     }
 };
 
@@ -94,7 +96,7 @@ const J = new Student({
     specialty: '*looks shifty eyed*',
     catchPhrase: `Live every day as if it were your last.`,
     favSubjects: ["Math"],
-    grade: 100,
+    grade: 87,
   });
 
   const D = new PM({
