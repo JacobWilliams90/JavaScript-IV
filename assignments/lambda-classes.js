@@ -121,17 +121,21 @@ const J = new Student({
     favSubjects: ["nothing"],
   });
   
-  console.log(D.incDec(J))
+
+
+
+
+  D.incDec(J)
   console.log(J.grade)
-  console.log(D.incDec(J))
+  D.incDec(J)
   console.log(J.grade)
-  console.log(D.incDec(J))
+  D.incDec(J)
   console.log(J.grade)
-  console.log(D.incDec(J))
+  D.incDec(J)
   console.log(J.grade)
-  console.log(D.incDec(J))
+  D.incDec(J)
   console.log(J.grade)
-  console.log(D.incDec(J))
+  D.incDec(J)
   console.log(J.grade)
 
   console.log(J.graduate())

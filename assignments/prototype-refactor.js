@@ -69,6 +69,7 @@ class GameObject{
 class CharacterStats extends GameObject {
     constructor(attributes){
     super(attributes);
+    this.healthPoints = attributes.healthPoints;
     }
 
     takeDamage() {
@@ -88,9 +89,9 @@ class CharacterStats extends GameObject {
 
 // function Humanoid(attributes) {
 // CharacterStats.call(this, attributes);
-//     this.team = attributes.team;
-//     this.weapons = attributes.weapons.toString();
-//     this.language = attributes.language;
+    // this.team = attributes.team;
+    // this.weapons = attributes.weapons.toString();
+    // this.language = attributes.language;
 // }
 
 // Humanoid.prototype = Object.create(CharacterStats.prototype);
@@ -102,6 +103,9 @@ class CharacterStats extends GameObject {
 class Humanoid extends CharacterStats{
     constructor(attributes) {
         super(attributes);
+        this.team = attributes.team;
+        this.weapons = attributes.weapons;
+        this.language = attributes.language;
     };
 
     greet(){
@@ -223,26 +227,25 @@ class HeroVillan extends Humanoid{
 
     fight1(target) {
         if (target.healthPoints <= 0){
-        console.log(target.name + ' is looking hurt. Finish Him!')
         return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`
         }
         else {
-        target["healthPoints"] = (target["healthPoints"] - 10)
+        target.healthPoints = (target.healthPoints - 10)
         return `${this.name} lashes out with the ${this.ability} ability.`;
         }
     };
 
     fight2(target) {
         if (target.healthPoints <= 0){
-        console.log(target.name + ' is looking hurt. Finish Him!')
         return `${this.name} finishes ` + target.name + ` with ${this.finish}!!!`;
         }
         else {
-        target["healthPoints"] = (target["healthPoints"] - 15)
-        return `${this.name} swings his ${this.weapons} at ` + target.name;
-        }
+        target.healthPoints = (target.healthPoints - 15)
+        return `${this.name} swings his ${this.weapons[0]} at ` + target.name;
+      }
     };
 }
+
 
 const hero = new HeroVillan({
     createdAt: new Date(),
@@ -254,9 +257,7 @@ const hero = new HeroVillan({
     healthPoints: 50,
     name: 'Jin Kazama',
     team: 'Mishima Zaibatsu',
-    weapons: [
-    'Chain',
-    ],
+    weapons: ['Chain'],
     language: [
     'Common',
     'Demonic',
@@ -275,9 +276,7 @@ const villan = new HeroVillan({
     healthPoints: 50,
     name: 'Kazuya Mishima',
     team: 'Mishima Zaibatsu',
-    weapons: [
-    'Fists',
-    ],
+    weapons: ['Fists'],
     language: [
     'Common',
     'Demonic',
@@ -310,17 +309,20 @@ console.log(hero.fight2(villan));
 console.log(hero.fight2(villan));
 console.log('Round 1 Finished');
 
+hero.healthPoints = 50;
+villan.healthPoints = 50;
+
 //VILLAN WIN EXAMPLE
-// console.log('Round 2 Fight!')
-// console.log(hero.fight1(villan));
-// console.log(villan.fight1(hero));
-// console.log(villan.fight2(hero));
-// console.log(hero.fight2(villan));
-// console.log(villan.fight1(hero));
-// console.log(hero.fight2(villan));
-// console.log(villan.fight2(hero));
-// console.log(villan.fight2(hero));
-// console.log('Round 2 Finished');
+console.log('Round 2 Fight!')
+console.log(hero.fight1(villan));
+console.log(villan.fight1(hero));
+console.log(villan.fight2(hero));
+console.log(hero.fight2(villan));
+console.log(villan.fight1(hero));
+console.log(hero.fight2(villan));
+console.log(villan.fight2(hero));
+console.log(villan.fight2(hero));
+console.log('Round 2 Finished');
 
 
   
